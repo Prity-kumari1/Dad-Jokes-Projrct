@@ -1,0 +1,95 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Dad Jokes Api</title>
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+
+            width: 100vw;
+            height: 100vh;
+            background-color: #222;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+            color: #fff;
+        }
+
+        .main_box {
+            background-color: #eee;
+            border-radius: 10px;
+            padding: 20px;
+            display: flex;
+            flex-direction: column;
+            align-items: center;
+            gap: 20px;
+        }
+
+        h1 {
+            font-size: 40px;
+            color: #000;
+        }
+
+        .main {
+            width: 500px;
+            height: 80px;
+            /* border: 2px solid red; */
+            color: #000;
+            font-size: 18px;
+        }
+
+        button {
+            width: 200px;
+            padding: 12px 26px;
+            border-radius: 22px;
+            background-color: yellow;
+            border: 2px solid black;
+            font-size: 18px;
+        }
+    </style>
+</head>
+
+<body>
+    <div class="main_box">
+        <h1>Welcome to Dad Jokes!</h1>
+        <section class="main"></section>
+        <button id="btn">Get New Jokes</button>
+    </div>
+
+
+    <script>
+        let url = "https://icanhazdadjoke.com/";
+        let btn = document.getElementById("btn");
+        let main = document.querySelector(".main")
+        function fetchJokes(){
+            let response = fetch(url,{headers:{
+                Accept:"application/json",
+            },})
+            response.then((res)=>{
+                return res.json()
+            }).then((data)=>{
+                main.innerHTML = data.joke;
+                console.log(data.joke);
+                
+            }).catch((err)=>{
+                console.log(err);
+                
+            })
+        }
+        fetchJokes()
+        btn.addEventListener("click", fetchJokes)
+    </script>
+</body>
+
+</html>
